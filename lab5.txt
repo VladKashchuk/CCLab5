@@ -1,0 +1,16 @@
+Microsoft Windows [Version 10.0.19041.685]
+(c) Корпорація Майкрософт (Microsoft Corporation), 2020. Усі права захищені.
+
+C:\Users\Користувач>aws sns create-topic --name VladLab5
+{
+    "TopicArn": "arn:aws:sns:us-east-1:331355251771:VladLab5"
+}
+
+
+C:\Users\Користувач>aws sns subscribe --topic-arn arn:aws:sns:us-east-1:331355251771:VladLab5 --protocol email --notification-endpoint kashuk99y@gmail.com
+{
+    "SubscriptionArn": "pending confirmation"
+}
+
+
+C:\Users\Користувач>aws cloudwatch put-metric-alarm --alarm-name StatusCheck --alarm-description "Lab5HealthStatus" --metric-name HealthyHostCount --namespace AWS/ApplicationELB --statistic Minimum --dimensions Name=LoadBalancer,Value=app/lab4/743e7b5083db4225 Name=TargetGroup,Value=targetgroup/lab4-Target-Group/65f54a274470f382 --unit Count --period 300 --threshold 2 --evaluation-periods 2 --comparison-operator LessThanThreshold --alarm-actions arn:aws:sns:us-east-1:331355251771:VladLab5
